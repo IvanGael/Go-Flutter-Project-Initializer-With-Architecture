@@ -26,8 +26,8 @@ This project is a Go-based CLI application that allows you to create a new Flutt
 
 Before you begin, ensure you have the following installed:
 
-- [Flutter](https://flutter.dev/docs/get-started/install)
-- [Go](https://golang.org/doc/install)
+- [Flutter](https://flutter.dev/)
+- [Go](https://go.dev/)
 
 
 ### Contributing
