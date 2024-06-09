@@ -1,0 +1,1 @@
+Fluttr project initializer with architecture CLI built in Go
