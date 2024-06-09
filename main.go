@@ -131,28 +131,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/counter_bloc.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
         create: (context) => CounterBloc(),
-        child: MyHomePage(),
+        child: const MyHomePage(),
       ),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final counterBloc = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter BLoC Example"),
+        title: const Text("Flutter BLoC Example"),
       ),
       body: Center(
         child: BlocBuilder<CounterBloc, int>(
@@ -165,7 +169,7 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           counterBloc.add(CounterEvent.increment);
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -181,7 +185,6 @@ enum CounterEvent { increment }
 class CounterBloc extends Bloc<CounterEvent, int> {
   CounterBloc() : super(0);
 
-  @override
   Stream<int> mapEventToState(CounterEvent event) async* {
     switch (event) {
       case CounterEvent.increment:
@@ -280,20 +283,19 @@ import 'package:redux/redux.dart';
 import 'redux/counter_reducer.dart';
 
 void main() {
-  final store = Store<int>(counterReducer, initialState: 0);
-  runApp(MyApp(store: store));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final Store<int> store;
 
-  MyApp({required this.store});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final store = Store<int>(counterReducer, initialState: 0);
     return StoreProvider<int>(
       store: store,
-      child: MaterialApp(
+      child: const MaterialApp(
         home: MyHomePage(),
       ),
     );
@@ -301,11 +303,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Redux Example"),
+        title: const Text("Flutter Redux Example"),
       ),
       body: Center(
         child: StoreConnector<int, String>(
@@ -322,7 +327,7 @@ class MyHomePage extends StatelessWidget {
         builder: (context, callback) {
           return FloatingActionButton(
             onPressed: callback,
-            child: Icon(Icons.add),
+            child: const Icon(Icons.add),
           );
         },
       ),
@@ -359,15 +364,17 @@ import 'package:scoped_model/scoped_model.dart';
 import 'scoped_model/counter_model.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ScopedModel<CounterModel>(
       model: CounterModel(),
-      child: MaterialApp(
+      child: const MaterialApp(
         home: MyHomePage(),
       ),
     );
@@ -375,11 +382,13 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter ScopedModel Example"),
+        title: const Text("Flutter ScopedModel Example"),
       ),
       body: Center(
         child: ScopedModelDescendant<CounterModel>(
@@ -392,7 +401,7 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           ScopedModel.of<CounterModel>(context).increment();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -419,6 +428,11 @@ class CounterModel extends Model {
 }
 
 func addMvvmArchitecture(projectPath string) {
+	// Add necessary packages for Provider
+	cmd := exec.Command("flutter", "pub", "add", "provider")
+	cmd.Dir = projectPath
+	executeCommand(cmd)
+
 	// Create example classes
 	mainContent := `
 import 'package:flutter/material.dart';
@@ -426,17 +440,19 @@ import 'package:provider/provider.dart';
 import 'viewmodel/counter_viewmodel.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CounterViewModel()),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         home: MyHomePage(),
       ),
     );
@@ -444,12 +460,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final counterViewModel = Provider.of<CounterViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter MVVM Example"),
+        title: const Text("Flutter MVVM Example"),
       ),
       body: Center(
         child: Text("${counterViewModel.count}"),
@@ -458,7 +476,7 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           counterViewModel.increment();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -572,28 +590,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/counter_cubit.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BlocProvider(
         create: (context) => CounterCubit(),
-        child: MyHomePage(),
+        child: const MyHomePage(),
       ),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final counterCubit = BlocProvider.of<CounterCubit>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Cubit Example"),
+        title: const Text("Flutter Cubit Example"),
       ),
       body: Center(
         child: BlocBuilder<CounterCubit, int>(
@@ -606,7 +628,7 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           counterCubit.increment();
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -639,13 +661,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: MyHomePage(),
     );
   }
@@ -656,21 +680,23 @@ final counterProvider = StateProvider<int>((ref) {
 });
 
 class MyHomePage extends ConsumerWidget {
+  const MyHomePage({super.key});
+
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final count = watch(counterProvider).state;
+  Widget build(BuildContext context, WidgetRef ref) {
+    final count = ref.watch(counterProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Riverpod Example"),
+        title: const Text("Flutter Riverpod Example"),
       ),
       body: Center(
         child: Text("$count"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.read(counterProvider).state++;
+          ref.read(counterProvider.notifier).state++;
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -692,25 +718,27 @@ import 'package:get/get.dart';
 import 'controller/counter_controller.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
   @override
   Widget build(BuildContext context) {
     final CounterController counterController = Get.put(CounterController());
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter GetX Example"),
+        title: const Text("Flutter GetX Example"),
       ),
       body: Center(
         child: Obx(() {
@@ -719,7 +747,7 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: counterController.increment,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -746,7 +774,7 @@ func addMobXArchitecture(projectPath string) {
 	cmd1.Dir = projectPath
 	executeCommand(cmd1)
 
-	cmd2 := exec.Command("flutter", "packages", "pub", "run", "build_runner", "build")
+	cmd2 := exec.Command("flutter", "pub", "add", "dev:build_runner", "build")
 	cmd2.Dir = projectPath
 	executeCommand(cmd2)
 
@@ -832,10 +860,11 @@ import 'package:flutter/material.dart';
 import 'package:states_rebuilder/states_rebuilder.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -851,7 +880,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter States Rebuilder Example"),
+        title: const Text("Flutter States Rebuilder Example"),
       ),
       body: Center(
         child: OnBuilder(
@@ -863,7 +892,7 @@ class MyHomePage extends StatelessWidget {
         onPressed: () {
           counterRM.state++;
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -873,48 +902,60 @@ class MyHomePage extends StatelessWidget {
 }
 
 func addCleanArchitecture(projectPath string) {
+	// Add necessary packages for CleanArchitecture
+	cmd1 := exec.Command("flutter", "pub", "add", "get_it")
+	cmd1.Dir = projectPath
+	executeCommand(cmd1)
+
+	cmd2 := exec.Command("flutter", "pub", "add", "provider")
+	cmd2.Dir = projectPath
+	executeCommand(cmd2)
+
 	// Create example classes
 	mainContent := `
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'injection_container.dart' as di;
 import 'features/counter/presentation/pages/counter_page.dart';
-
+	
 void main() {
-  di.init();
-  runApp(MyApp());
+	di.init();
+	runApp(const MyApp());
 }
-
+	
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: di.providers,
-      child: MaterialApp(
-        home: CounterPage(),
-      ),
-    );
-  }
-}
+const MyApp({super.key});
+	
+@override
+Widget build(BuildContext context) {
+	return MultiProvider(
+		providers: di.providers,
+		  child: const MaterialApp(
+			home: CounterPage(),
+		  ),
+		);
+	}
+}	
 `
 	createFile(filepath.Join(projectPath, "lib", "main.dart"), mainContent)
 
 	injectionContainerContent := `
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'features/counter/presentation/provider/counter_provider.dart';
-
+	
 final sl = GetIt.instance;
-
+	
 void init() {
-  sl.registerFactory(() => CounterProvider());
-
-  providers = [
-    ChangeNotifierProvider(create: (_) => sl<CounterProvider>()),
-  ];
+	sl.registerFactory(() => CounterProvider());
+	
+	providers = [
+		ChangeNotifierProvider(create: (_) => sl<CounterProvider>()),
+	];
 }
-
-List<SingleChildWidget> providers = [];
+	
+List<SingleChildWidget> providers = [];	
 `
 	os.MkdirAll(filepath.Join(projectPath, "lib", "features", "counter", "presentation", "pages"), 0755)
 	os.MkdirAll(filepath.Join(projectPath, "lib", "features", "counter", "presentation", "provider"), 0755)
@@ -924,25 +965,27 @@ List<SingleChildWidget> providers = [];
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/counter_provider.dart';
-
+	
 class CounterPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final counterProvider = Provider.of<CounterProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Flutter Clean Architecture Example"),
-      ),
-      body: Center(
-        child: Text("${counterProvider.count}"),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: counterProvider.increment,
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
+	const CounterPage({super.key});
+	
+@override
+Widget build(BuildContext context) {
+	final counterProvider = Provider.of<CounterProvider>(context);
+	return Scaffold(
+		appBar: AppBar(
+			title: const Text("Flutter Clean Architecture Example"),
+		),
+		body: Center(
+			child: Text("${counterProvider.count}"),
+		),
+		floatingActionButton: FloatingActionButton(
+			onPressed: counterProvider.increment,
+			child: const Icon(Icons.add),
+		  ),
+		);
+	}
+}	
 `
 	createFile(filepath.Join(projectPath, "lib", "features", "counter", "presentation", "pages", "counter_page.dart"), counterPageContent)
 
